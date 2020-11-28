@@ -1,4 +1,15 @@
 #!/usr/bin/env python3
+##############################################################################
+# Small Quick and Dirty WebCam Manager
+# Permit to load/unload the WebCam Video Module
+#
+# Author: GPaquis (aka Loops)
+# Version: 1.0
+# 
+# Program Run as is. No Reponsability from my side for any issue
+# Keep in mind, your have the choice
+#############################################################################
+
 from gi.repository import Gtk
 import sys
 import os
@@ -69,6 +80,11 @@ def label_construct():
     else:
       label="WebCam Disable"
     return label
+
+#Force Sudo Elevation
+if euid != 0:
+    args = ['sudo', sys.executable] + sys.argv + [os.environ]
+    os.execlpe('sudo', *args)
 
 app = MyApplication()
 exit_status = app.run(sys.argv)
